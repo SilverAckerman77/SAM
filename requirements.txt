@@ -1,0 +1,16 @@
+numpy
+opencv-python
+scikit-image
+scikit-learn
+scipy
+matplotlib
+Pillow
+PyYAML
+tqdm
+requests
+imagehash
+reportlab
+yt-dlp
+torch
+torchvision
+git+https://github.com/facebookresearch/segment-anything.git

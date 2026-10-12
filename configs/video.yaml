@@ -1,0 +1,5 @@
+seed: 42
+input_video: "C:/Users/neera/Downloads/vidssave.com YTB_1791655562357 360P.mp4"
+output_dir: outputs/video
+max_lost: 10
+min_instance_area: 200

@@ -1,0 +1,8 @@
+seed: 42
+model_type: vit_b
+checkpoint: checkpoints/sam_vit_b_01ec64.pth
+prompt_strategy: automatic
+min_area_fraction: 0.01
+max_area_fraction: 0.95
+min_solidity: 0.55
+max_instances: 20

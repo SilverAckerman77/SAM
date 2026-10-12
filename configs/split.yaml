@@ -1,0 +1,6 @@
+seed: 42
+input_dir: data/raw
+task1_dir: outputs/task1
+output_dir: outputs/split
+dev_fraction: 0.8
+near_duplicate_hamming: 6

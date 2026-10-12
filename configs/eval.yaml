@@ -1,0 +1,6 @@
+seed: 42
+input_dir: data/raw
+task1_dir: outputs/task1
+split_file: outputs/split/split.json
+output_dir: outputs/eval
+config: configs/experiments.yaml

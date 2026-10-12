@@ -1,0 +1,19 @@
+seed: 42
+input_dir: data/raw
+task1_dir: outputs/task1
+split_file: outputs/split/split.json
+output_dir: outputs/experiments
+trials:
+  - otsu
+  - hsv_value
+  - lab_lightness
+  - adaptive
+  - hsv_saturation
+  - hsv_value_inv
+  - lab_a_inv
+  - lab_b
+  - ycrcb_cr_inv
+  - ycrcb_cb
+  - adaptive_inv
+  - bright
+  - bright_low_sat
