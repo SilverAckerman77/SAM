@@ -14,3 +14,5 @@ yt-dlp
 torch
 torchvision
 git+https://github.com/facebookresearch/segment-anything.git
+transformers
+accelerate

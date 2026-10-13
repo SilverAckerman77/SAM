@@ -1,0 +1,11 @@
+seed: 42
+detector_model: IDEA-Research/grounding-dino-base
+sam_model_type: vit_h
+sam_checkpoint: checkpoints/sam_vit_h.pth
+text_prompt: egg.
+box_threshold: 0.35
+text_threshold: 0.25
+nms_iou: 0.5
+min_area_fraction: 0.01
+max_area_fraction: 0.60
+device: cpu
