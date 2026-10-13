@@ -65,6 +65,7 @@ class MultiObjectTracker:
         self.tracks: list[Track] = []
         self.total_match_count = 0
         self.id_switch_proxy_count = 0
+        self.completed_ages: list[int] = []
 
     def update(self, detections: list[Detection]) -> list[Track]:
         unmatched_tracks = set(range(len(self.tracks)))
@@ -95,7 +96,13 @@ class MultiObjectTracker:
         for track_index in unmatched_tracks:
             self.tracks[track_index].lost += 1
             self.tracks[track_index].centroid = self.tracks[track_index].predicted_centroid()
-        self.tracks = [track for track in self.tracks if track.lost <= self.max_lost]
+        retained = []
+        for track in self.tracks:
+            if track.lost <= self.max_lost:
+                retained.append(track)
+            else:
+                self.completed_ages.append(track.age)
+        self.tracks = retained
         for detection_index in unmatched_detections:
             detection = detections[detection_index]
             self.tracks.append(Track(

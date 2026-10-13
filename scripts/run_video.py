@@ -26,7 +26,7 @@ def main() -> None:
         raise OSError(f"Could not open video: {config['input_video']}")
     output = Path(config["output_dir"])
     output.mkdir(parents=True, exist_ok=True)
-    frozen_path = output.parent / "experiments" / "frozen_config.json"
+    frozen_path = Path(config.get("frozen_config", output.parent / "experiments" / "frozen_config.json"))
     method = json.loads(frozen_path.read_text(encoding="utf-8"))["method"] if frozen_path.exists() else "final"
     fps = capture.get(cv2.CAP_PROP_FPS) or 30.0
     width, height = int(capture.get(cv2.CAP_PROP_FRAME_WIDTH)), int(capture.get(cv2.CAP_PROP_FRAME_HEIGHT))
@@ -34,6 +34,7 @@ def main() -> None:
     writer = cv2.VideoWriter(str(output / "annotated.mp4"), cv2.VideoWriter_fourcc(*"mp4v"), fps, (width, height))
     tracker = MultiObjectTracker(max_lost=int(config["max_lost"]))
     max_concurrent_tracks = 0
+    active_track_counts: list[int] = []
     keyframes = {0, max(0, frame_count // 4), max(0, frame_count // 2),
                  max(0, (3 * frame_count) // 4), max(0, frame_count - 1)}
     keyframe_dir = output / "keyframes"
@@ -49,7 +50,9 @@ def main() -> None:
             mask = segment(image, method)
             detections = extract_detections(mask, int(config["min_instance_area"]))
             tracks = tracker.update(detections)
-            max_concurrent_tracks = max(max_concurrent_tracks, sum(track.lost == 0 for track in tracks))
+            active_count = sum(track.lost == 0 for track in tracks)
+            active_track_counts.append(active_count)
+            max_concurrent_tracks = max(max_concurrent_tracks, active_count)
             annotated = draw_tracks(image, tracks, mask)
             writer.write(annotated)
             if frame in keyframes:
@@ -72,6 +75,15 @@ def main() -> None:
         "unique_track_ids": tracker.next_id - 1,
         "association_matches": tracker.total_match_count,
         "max_concurrent_tracks_observed": max_concurrent_tracks,
+        "mean_concurrent_tracks_observed": sum(active_track_counts) / len(active_track_counts) if active_track_counts else 0.0,
+        "track_length_distribution": {
+            "min": min(tracker.completed_ages + [track.age for track in tracker.tracks], default=0),
+            "max": max(tracker.completed_ages + [track.age for track in tracker.tracks], default=0),
+            "count": len(tracker.completed_ages) + len(tracker.tracks),
+        },
+        "short_track_threshold_frames": 10,
+        "short_track_count": sum(age < 10 for age in tracker.completed_ages)
+        + sum(track.age < 10 for track in tracker.tracks),
         "max_lost_frames": config["max_lost"],
         "id_switches_manual_review_required": True,
     }

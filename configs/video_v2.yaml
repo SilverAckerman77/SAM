@@ -1,0 +1,6 @@
+seed: 42
+input_video: "C:/Users/neera/Downloads/vidssave.com YTB_1791655562357 360P.mp4"
+output_dir: outputs/video_v2
+frozen_config: outputs/experiments_v2/frozen_config.json
+max_lost: 6
+min_instance_area: 500
