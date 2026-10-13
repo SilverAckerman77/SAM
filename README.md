@@ -46,7 +46,7 @@ python scripts/inspect_dataset.py --input data/raw --output outputs/exploration
 3. Set `REPO_URL` in the first cell if cloning the repository; the notebook also supports copying the scripts into the notebook.
 4. Run All. It skips images that already have masks and writes progress/timing information.
 5. Download `/kaggle/working/task1_outputs.zip` from the Output tab.
-6. Unzip it into `outputs/task1/` in this repository.
+6. Unzip it into `outputs/task1_gsam/` in this repository.
 
 `scripts/run_task1.py` also supports a local CPU run, but SAM is expected to be
 slow there:
@@ -87,8 +87,8 @@ simultaneous tracks. It recorded 30 tracks shorter than 10 frames and five
 candidate ID-switch ranges. Manual review is required; candidates are not
 confirmed switches.
 
-After uploading the result to Google Drive, replace
-`[GOOGLE_DRIVE_VIDEO_LINK]` in the report source and README.
+The public video-tracking link is included in `report/report.md` and the PDF:
+https://youtu.be/Y4JyV94y2_A?si=CaGf-Q5j4qhZ8MEE
 
 ## Reproducibility and limitations
 
@@ -98,6 +98,7 @@ plot, or experiment-log row should be added manually.
 
 ## AI disclosure
 
-Edit the marked disclosure section in `report/report.md` to describe which
-parts were assisted by AI coding tools and which decisions, runs, reviews, and
-verification were completed by the candidate.
+The report discloses that AI coding tools assisted with scaffolding, debugging,
+documentation, and formatting. The candidate selected the methods and
+parameters, reviewed the outputs, ran the experiments, interpreted the
+results, and verified the implementation.

@@ -6,9 +6,15 @@ complete. Existing pre-revision outputs remain preserved.
 
 ## AI tool disclosure
 
-**Edit this section before submission.** AI coding tools assisted with
-boilerplate, scaffolding, debugging, and report drafting. The candidate must
-describe their own decisions, review, execution, and verification here.
+AI coding tools were used for implementation scaffolding, code navigation,
+debugging assistance, documentation drafting, and report formatting. The
+candidate selected the pipeline design, reviewed and modified the generated
+code, chose the Grounded-SAM and classical-segmentation parameters, inspected
+the masks and QA sheets, ran the Kaggle and local experiments, interpreted the
+metrics, and verified the tracking diagnostics. The candidate can explain the
+underlying detector, SAM prompting, thresholding, morphology, metric
+calculation, and tracker-association logic and made the final decisions about
+what was retained and disclosed.
 
 ## Dataset exploration
 
@@ -56,8 +62,8 @@ and five candidate ID-switch ranges.
 This is not a true egg count: keyframes show substantial false positives from
 the frozen image segmentation method, including background objects and a
 watermark. Candidate ranges require manual review, and no confirmed switch count is claimed.
-Replace the placeholder Drive link below after uploading the final video.
+The public video-tracking output link is provided below.
 
 ## Video link
 
-[GOOGLE_DRIVE_VIDEO_LINK]
+https://youtu.be/Y4JyV94y2_A?si=CaGf-Q5j4qhZ8MEE
