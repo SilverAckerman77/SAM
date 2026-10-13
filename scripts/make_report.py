@@ -25,8 +25,9 @@ def main() -> None:
     source = Path("report/report.md")
     destination = output / "report.md"
     destination.write_text(source.read_text(encoding="utf-8"), encoding="utf-8")
-    eval_summary = Path("outputs/eval/summary.json")
-    experiments = Path("outputs/experiments/experiments.csv")
+    eval_summary = Path("outputs/eval_v2/summary.json")
+    experiments = Path("outputs/experiments_v2/experiments.csv")
+    video_stats = Path("outputs/video_v2/stats.json")
     styles = getSampleStyleSheet()
     pdf = output / "report.pdf"
     story = [Paragraph(config["title"], styles["Title"]), Spacer(1, 0.2 * inch)]
@@ -55,8 +56,10 @@ def main() -> None:
         story.append(Paragraph(f"{len(lines) - 1} development trials were executed. See {experiments} for the raw log.", styles["BodyText"]))
     story.extend([
         Spacer(1, 0.2 * inch),
+        Paragraph("Video diagnostics", styles["Heading2"]),
+        Paragraph("The revised video run is summarized in outputs/video_v2/stats.json. Candidate ID-switch ranges require manual review and are not confirmed switches.", styles["BodyText"]),
         Paragraph("Limitations", styles["Heading2"]),
-        Paragraph("SAM masks are pseudo-ground truth and include flagged large-area cases. Video tracking remains pending a supplied video.", styles["BodyText"]),
+        Paragraph("Grounded-SAM masks are pseudo-ground truth rather than human annotations. Background texture, hands, glare, overlap, and watermark false positives remain limitations.", styles["BodyText"]),
         Spacer(1, 0.2 * inch),
         Paragraph("AI tool disclosure", styles["Heading2"]),
         Paragraph("Edit report.md to document the candidate's actual decisions, review, execution, and verification.", styles["BodyText"]),
