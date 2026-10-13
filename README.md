@@ -63,8 +63,8 @@ on a Tesla T4 in 266.54 seconds; validation passed for all masks.
 ### Revised experiments and evaluation
 
 ```powershell
-python scripts/run_experiments_v2.py --config configs/experiments_v2.yaml
-python scripts/run_eval_v2.py --config configs/eval_v2.yaml
+python scripts/run_experiments_v2.py
+python scripts/run_eval_v2.py
 python scripts/run_video.py --config configs/video_v2.yaml
 python scripts/analyze_video_v2.py --config configs/video_v2.yaml
 python scripts/make_report.py --config configs/report.yaml
